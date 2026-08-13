@@ -3,25 +3,19 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
  
  
-// =========================
-// PÁGINA INICIAL ADM
-// =========================
+
 router.get("/", (req, res) => {
     res.render("pages/index-adm");
 });
  
  
-// =========================
-// CLIENTES
-// =========================
+
 router.get("/adm-cliente", (req, res) => {
     res.render("pages/adm-cliente");
 });
  
  
-// =========================
-// NOVO CLIENTE - GET
-// =========================
+
 router.get("/adm-cliente-novo", (req, res) => {
     res.render("pages/adm-cliente-novo", {
         listaErros: [],
@@ -31,9 +25,8 @@ router.get("/adm-cliente-novo", (req, res) => {
 });
  
  
-// =========================
-// NOVO CLIENTE - POST
-// =========================
+
+
 router.post(
     "/adm-cliente-novo",
  
@@ -76,15 +69,13 @@ router.post(
             return true;
         }),
  
-    // TIPO
     body("tipo")
         .notEmpty()
         .withMessage("O tipo de usuário é obrigatório!")
         .bail()
         .isInt({ min: 1, max: 2 })
         .withMessage("Tipo deve ser 1 ou 2!"),
- 
-    // STATUS
+
     body("status")
         .notEmpty()
         .withMessage("O status é obrigatório!")
@@ -92,7 +83,6 @@ router.post(
         .isInt({ min: 1, max: 2 })
         .withMessage("Status deve ser 1 ou 2!"),
  
-    // NOME DE USUÁRIO
     body("nomeUsuario")
         .trim()
         .notEmpty()
@@ -101,7 +91,6 @@ router.post(
         .isLength({ min: 1, max: 10 })
         .withMessage("O nome de usuário deve ter de 1 a 10 caracteres!"),
  
-    // CEP
     body("cep")
         .trim()
         .notEmpty()
@@ -119,7 +108,7 @@ router.post(
         const error = validationResult(req);
  
         // =========================
-        // SE TIVER ERRO
+        // ERRO
         // =========================
         if (!error.isEmpty()) {
  
@@ -133,7 +122,7 @@ router.post(
         }
  
         // =========================
-        // SE ESTIVER TUDO CERTO
+        // CERTO
         // =========================
         console.log("Cliente válido:", req.body);
  
@@ -154,16 +143,14 @@ router.get("/adm-cliente-edit", (req, res) => {
 });
  
  
-// =========================
-// LISTAR CLIENTES
-// =========================
+
 router.get("/adm-cliente-list", (req, res) => {
     res.render("pages/adm-cliente-list");
 });
  
  
 // =========================
-// DELETAR CLIENTE
+// DELETAR
 // =========================
 router.get("/adm-cliente-del", (req, res) => {
     res.render("pages/adm-cliente-del");
