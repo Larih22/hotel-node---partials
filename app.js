@@ -34,6 +34,3 @@ app.use("/adm", rotaAdm);
 app.listen(porta, ()=>{
     console.log(`Servidor on-line \nhttp://localhost:${porta}`)
 })
-
-//nome1
-//nome2

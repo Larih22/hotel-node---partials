@@ -1,36 +1,184 @@
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Novo cliente</title>
+ 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://fonts.googpis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
 </head>
-
+ 
 <body>
-    <!-- <div class="navbar navbar-inverse navbar-fixed-top"> -->
-            <%- include("../partials/header-adm") -%>
-
-    <div class="container body-content">
-        <h2>Novo cliente</h2>
-
-        <form action="/adm/adm-cliente-novo" method="post">
-
-              <%- include("../partials/form-cliente") -%>
-        </form>
-
-        <div>
-            <a class="btn btn-primary btn-lg" href="/adm/adm-cliente" role="button">voltar</a>
-
-        </div>
-
-        <hr />
+ 
+    <%- include("../partials/header-adm") -%>
+ 
+        <div class="container body-content">
+ 
+            <h2>Novo cliente</h2>
+ 
+            <!-- MENSAGEM DE ERRO -->
+            <% if (listaErros && listaErros.length > 0) { %>
+ 
+                <div class="alert alert-danger">
+                    <strong>Corrija os seguintes erros:</strong>
+ 
+                    <ul>
+                        <% listaErros.forEach(erro => { %>
+                            <li>
+                                <%= erro.msg %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+ 
+            <% } %>
+ 
+ 
+            <!-- MENSAGEM DE SUCESSO -->
+            <% if (mensagemSucesso) { %>
+ 
+                <div class="alert alert-success">
+                    <strong><%= mensagemSucesso %></strong>
+                </div>
+ 
+            <% } %>
+ 
+ 
+            <!-- FORMULÁRIO -->
+            <form action="/adm/adm-cliente-novo" method="post">
+ 
+                <!-- NOME -->
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input
+                        type="text"
+                        name="nome"
+                        class="form-control"
+                        value="<%= campos.nome || '' %>"
+                    >
+                </div>
+ 
+ 
+                <!-- CEP -->
+                <div class="form-group">
+                    <label>CEP</label>
+                    <input
+                        type="text"
+                        name="cep"
+                        class="form-control"
+                        value="<%= campos.cep || '' %>"
+                    >
+                </div>
+ 
+ 
+                <!-- NOME DE USUÁRIO -->
+                <div class="form-group">
+                    <label>Nome de Usuário</label>
+                    <input
+                        type="text"
+                        name="nomeUsuario"
+                        class="form-control"
+                        value="<%= campos.nomeUsuario || '' %>"
+                    >
+                </div>
+ 
+ 
+                <!-- E-MAIL -->
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        value="<%= campos.email || '' %>"
+                    >
+                </div>
+ 
+ 
+                <!-- SENHA -->
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input
+                        type="password"
+                        name="senha"
+                        class="form-control"
+                    >
+                </div>
+ 
+ 
+                <!-- CONFIRMAR SENHA -->
+                <div class="form-group">
+                    <label>Confirmar senha</label>
+                    <input
+                        type="password"
+                        name="cSenha"
+                        class="form-control"
+                    >
+                </div>
+ 
+ 
+                <!-- TIPO -->
+                <div class="form-group">
+                    <label>Tipo Usuário</label>
+ 
+                    <select name="tipo" class="form-control">
+ 
+                        <option value="">Selecione o tipo</option>
+ 
+                        <option value="1" <%= campos.tipo == "1" ? "selected" : "" %>>
+                            Comum
+                        </option>
+ 
+                        <option value="2" <%= campos.tipo == "2" ? "selected" : "" %>>
+                            Administrador
+                        </option>
+ 
+                    </select>
+                </div>
+ 
+ 
+                <!-- STATUS -->
+                <div class="form-group">
+                    <label>Status</label>
+ 
+                    <select name="status" class="form-control">
+ 
+                        <option value="">Selecione o status</option>
+ 
+                        <option value="1" <%= campos.status == "1" ? "selected" : "" %>>
+                            Ativo
+                        </option>
+ 
+                        <option value="2" <%= campos.status == "2" ? "selected" : "" %>>
+                            Inativo
+                        </option>
+ 
+                    </select>
+                </div>
+ 
+ 
+                <br>
+ 
+                <button type="submit" class="btn btn-success">
+                    Salvar
+                </button>
+ 
+            </form>
+ 
+ 
+            <br>
+ 
+            <a class="btn btn-primary btn-lg" href="/adm/adm-cliente">
+                Voltar
+            </a>
+ 
+            <hr />
+ 
             <%- include("../partials/footer-adm") -%>
-    </div>
+ 
+        </div>
+ 
 </body>
-
+ 
 </html>
